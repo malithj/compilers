@@ -1,0 +1,3 @@
+my_2nd_var = 2;
+if (x)
+	return a == 1;
