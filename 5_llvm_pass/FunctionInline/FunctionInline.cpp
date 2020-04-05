@@ -20,4 +20,4 @@ namespace {
 char FunctionInlinePass::ID = 0;
 
 // Register the pass so `opt -skeleton` runs it.
-static RegisterPass<FunctionInlinePass> X("skeleton", "a useless pass");
+static RegisterPass<FunctionInlinePass> X("finline", "a function inline pass");
