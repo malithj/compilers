@@ -6,5 +6,5 @@ The project contains an introduction to compiler frontend including tokenizer, n
 
 The project also contains backend analysis of languages using LLVM.
 
-![LLVM Logo](https://llvm.org/img/DragonFull.png)<!-- .element height="50%" width="50%" -->
+![LLVM Logo](https://llvm.org/img/DragonFull.png)<!-- .element height="20%" width="20%" -->
 This dragon image is owned by Apple Inc. 
