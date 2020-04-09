@@ -1,0 +1,45 @@
+# LLVM Pass to Inline Functions 
+
+# Writing a Function Inliner Pass (With LLVM Pass Manager)
+### Development Instructions
+Build:
+
+    $ cd compilers/5_llvm_pass
+    $ mkdir build
+    $ cd build
+    $ cmake ..
+    $ make
+    $ cd ..
+
+Run:
+
+    $ clang -S -emit-llvm -Xclang -disable-O0-optnone foo.c
+    $ opt -load build/FunctionInliner/libFunctionInliner.* -finline -S foo.ll
+    
+The `-Xclang -disable-O0-optnone` flag ensures that Clang will allow later optimizations even when initially compiling without any. 
+
+### Deployment Instructions (Integration with LLVM)
+1. Download the github repository to your place of choosing. 
+2. Create a symbolic link from the llvm-project directory to the module.
+	```bash
+		:~$ ln -s /path_to_folder/FunctionInliner /path_to_folder/llvm-project/llvm/lib/Transforms/
+	```
+3. Add the following code snippet to `lib/CMakeLists.txt`.
+	```cpp
+		add_subdirectory(FunctionInliner)
+	```
+4. Navigate to the top build directory (in your llvm project) and use your make command (gmake/make).
+	```bash
+		:~$ make
+	```
+
+#### LLVM File Modifications Required
+
+##### Modifications to include files
+`include/llvm/InitializePasses.h`      : `void initializeFunctionInlinerPass(Registry);`
+`include/llvm/Transforms/Scalar.h`     : `Pass * createFunctionInlinerPass();`
+
+
+#### Modificatoins to cpp files
+`lib/Transforms/Scalar/Scalar.cpp`     : `initializeFunctionInlinerPass(Registry);`
+`lib/Transforms/Scalar/CMakeLists.txt` : `../FunctionInliner/FunctionInliner.cpp`

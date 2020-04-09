@@ -6,9 +6,9 @@
 using namespace llvm;
 
 namespace {
-  struct FunctionInlinePass : public FunctionPass {
+  struct SimplePass : public FunctionPass {
     static char ID;
-    FunctionInlinePass() : FunctionPass(ID) {}
+    SimplePass() : FunctionPass(ID) {}
 
     virtual bool runOnFunction(Function &F) {
       errs() << "I saw a function called " << F.getName() << "!\n";
@@ -17,7 +17,7 @@ namespace {
   };
 }
 
-char FunctionInlinePass::ID = 0;
+char SimplePass::ID = 0;
 
 // Register the pass so `opt -skeleton` runs it.
-static RegisterPass<FunctionInlinePass> X("finline", "a function inline pass");
+static RegisterPass<SimplePass> X("fsimple", "a simple llvm pass");
