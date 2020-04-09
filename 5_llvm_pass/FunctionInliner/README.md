@@ -40,6 +40,13 @@ The `-Xclang -disable-O0-optnone` flag ensures that Clang will allow later optim
 `include/llvm/Transforms/Scalar.h`     : `Pass * createFunctionInlinerPass();`
 
 
-#### Modificatoins to cpp files
+##### Modifications to cpp files
 `lib/Transforms/Scalar/Scalar.cpp`     : `initializeFunctionInlinerPass(Registry);`
 `lib/Transforms/Scalar/CMakeLists.txt` : `../FunctionInliner/FunctionInliner.cpp`
+
+
+##### Run commands
+Run:
+
+    $ clang -S -emit-llvm -Xclang -disable-O0-optnone foo.c
+    $ opt -finline -S foo.ll
